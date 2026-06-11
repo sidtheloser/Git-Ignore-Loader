@@ -1,4 +1,4 @@
-import requests, argparse, fallbackdata, base64
+import requests, argparse, fallbackdata, base64, os
 
 parser = argparse.ArgumentParser()
 
@@ -7,6 +7,12 @@ parser.add_argument("--langs", nargs="+", required=True)
 parser.add_argument("-v", "--version", action="version", version="1.0")
 
 args = parser.parse_args()
+
+if os.path.isfile(".gitignore"):
+    ch = input("File already exists! Do you wish to override your old gitignore? (y/N) ")
+
+    if ch not in ["y", "Y"]:
+        exit()
 
 langs: list[str] = args.langs
 
